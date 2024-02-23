@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import Cookies from "universal-cookie";
 
 function Login () {
+    const [mail, setMail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const usrCookie = new Cookies(null, { path: '/', maxAge: 2592000 });
+
+    usrCookie.set("usr", false);
+
+    const sendData = async (event) => {
+        event.preventDefault();
+
+        console.log("enviando: "+ JSON.stringify({ mail: mail, password: password }) );
+
+        const response = await window.fetch("http://localhost:5000", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify ({
+                mail : mail,
+                password : password
+            })
+        });
+
+        if (response.ok) {
+            console.log("bienvenido");
+            usrCookie.set("usr", true);
+        } else {
+            console.log("Usuario o contraseña no coinciden")
+        }
+    }
     return (
         <>
-            <form>
+            <form onSubmit={sendData}>
                 <div>
                 <label>
                     Correo Electronico
@@ -11,6 +42,9 @@ function Login () {
                 </div>
                 <input 
                     type="email"
+                    value={mail}
+                    onChange={(e) => setMail(e.target.value)}
+                    required
                 />
                 <div>
                 <label>
@@ -19,9 +53,12 @@ function Login () {
                 </div>
                 <input 
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
                 <div>
-                    <button>Iniciar Sesion</button>
+                    <button type="submit">Iniciar Sesion</button>
                 </div>
             </form>
         </>

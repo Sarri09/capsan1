@@ -11,5 +11,13 @@ module.exports = function(app) {
             response.status(500).json(e);
         })*/
         res.json({"mensaje" : "Usuario registrado con exito"});
-      })
+    });
+
+    app.post('/', (req, res) => {
+        const verifusr = req.body;
+
+        console.log("recibiendo usuario: \n"+verifusr+"\n para verificacion");
+
+
+    });
 }
