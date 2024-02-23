@@ -1,5 +1,7 @@
 ## IMPORTANTE
-Los archivos del front se encuentran en la carpeta src, si te fijas hay un archivo llamado `app.js`, este es de donde sale todo el front, los archivos `login.js` y `register.js` se llaman como si fuesen etiquetas html, es una funcion que entrega react para realizar la pagina en una sola pestaña, los estilos te recomiendo realizarlos en una carpeta aparte dentro de la carpeta src, para que asi se vea mas ordenado, la forma de importarlos a los formularios esta aqui `https://create-react-app.dev/docs/adding-a-stylesheet/`
+Los archivos del front se encuentran en la carpeta src, si te fijas hay un archivo llamado `app.js`, este es de donde sale todo el front, los archivos `login.js` y `register.js` se llaman como si fuesen etiquetas html, es una funcion que entrega react para realizar la pagina en una sola pestaña, los estilos te recomiendo realizarlos en una carpeta aparte dentro de la carpeta src, para que asi se vea mas ordenado, la forma de importarlos a los formularios esta aqui 
+
+https://create-react-app.dev/docs/adding-a-stylesheet/
 
 ## Como correr el proyecto
 Debes ejecutar el comando 
@@ -27,7 +29,9 @@ Quizas te pida instalar algunas dependencias para correr la api, tales como:
 
 `npm install cors --save`
 
-Asegurate de tener instalado node.js, lo puedes descargar de aqui `https://nodejs.org/en/download/current`
+Asegurate de tener instalado node.js, lo puedes descargar de aqui 
+
+https://nodejs.org/en/download/current
 
 ## Errores
 
