@@ -8,6 +8,7 @@ function Login () {
     const usrCookie = new Cookies(null, { path: '/', maxAge: 2592000 });
 
     usrCookie.set("usr", false);
+    usrCookie.set("dotcom_user", /*aqui quiero agregar en la cookie el valor del nombre ligado al correo del usuario*/);
 
     const sendData = async (event) => {
         event.preventDefault();
@@ -26,8 +27,9 @@ function Login () {
         });
 
         if (response.ok) {
-            console.log("bienvenido");
+            //console.log("bienvenido");
             usrCookie.set("usr", true);
+            window.location.reload(false);
         } else {
             console.log("Usuario o contraseña no coinciden")
         }
@@ -60,6 +62,7 @@ function Login () {
                 <div>
                     <button type="submit">Iniciar Sesion</button>
                 </div>
+                
             </form>
         </>
     );

@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "./login";
 import Register from "./register";
+import Dashboard from "./dashboard";
 import Cookies from "universal-cookie";
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
 
   return (
    <>
-    {SessionExist() ? <Register/> : <Login/>}
+    {SessionExist() ? <Dashboard/> : <Login/>}
+    
    </>
   );
 }
