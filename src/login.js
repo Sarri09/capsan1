@@ -1,38 +1,47 @@
 import React, { useState } from "react";
 import Cookies from "universal-cookie";
+import Swal from "sweetalert2";
 
 function Login () {
-    const [mail, setMail] = useState("");
+    const [email, setemail] = useState("");
     const [password, setPassword] = useState("");
 
     const usrCookie = new Cookies(null, { path: '/', maxAge: 2592000 });
 
     usrCookie.set("usr", false);
-    usrCookie.set("dotcom_user", /*aqui quiero agregar en la cookie el valor del nombre ligado al correo del usuario*/);
 
     const sendData = async (event) => {
         event.preventDefault();
 
-        console.log("enviando: "+ JSON.stringify({ mail: mail, password: password }) );
+        console.log("enviando: "+ JSON.stringify({ email: email, password: password }) );
 
-        const response = await window.fetch("http://localhost:5000", {
+        const response = await window.fetch("http://localhost:5000/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify ({
-                mail : mail,
+                email : email,
                 password : password
             })
         });
 
         if (response.ok) {
-            //console.log("bienvenido");
-            usrCookie.set("usr", true);
-            window.location.reload(false);
-        } else {
-            console.log("Usuario o contraseña no coinciden")
-        }
+            const data = await response.json();
+            console.log('Response data:', data); // Agrega esta línea
+            if (data.isAuthenticated) {
+                usrCookie.set("usr", true);
+                usrCookie.set("dotcom_user", JSON.stringify(data.userData));
+                window.location.reload(false);
+            } else {
+                console.log("Usuario o contraseña no coinciden")
+                Swal.fire({
+                    icon: "error",
+                    title: "Error de autenticación",
+                    text: "Usuario o contraseña incorrectos",
+                });
+            }
+        }        
     }
     return (
         <>
@@ -44,8 +53,8 @@ function Login () {
                 </div>
                 <input 
                     type="email"
-                    value={mail}
-                    onChange={(e) => setMail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setemail(e.target.value)}
                     required
                 />
                 <div>

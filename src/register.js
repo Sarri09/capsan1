@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 
 function Register () {
-    const [name, setName] = useState("");
-    const [lname, setLname] = useState("");
-    const [mail, setMail] = useState("");
+    const [nombre, setnombre] = useState("");
+    const [apellido, setapellido] = useState("");
+    const [email, setemail] = useState("");
     const [password, setPassword] = useState("");
     
     const sendData = async (event) => {
         event.preventDefault();
 
-        console.log({ name : name, lname : lname, mail : mail, password : password });
+        console.log({ nombre : nombre, apellido : apellido, email : email, password : password });
 
-        const response = await window.fetch("http://localhost:5000", {
+        const response = await window.fetch("http://localhost:5000/register", {
             method : "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name: name,
-                lname: lname,
-                mail: mail,
+                email: email,
+                nombre: nombre,
+                apellido: apellido,
                 password: password
             }),
         });
@@ -41,8 +41,8 @@ function Register () {
                     </div>
                     <input 
                         typeof="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={nombre}
+                        onChange={(e) => setnombre(e.target.value)}
                         required
                     />
                     <div>
@@ -52,8 +52,8 @@ function Register () {
                     </div>
                     <input 
                         typeof="text"
-                        value={lname}
-                        onChange={(e) => setLname(e.target.value)}
+                        value={apellido}
+                        onChange={(e) => setapellido(e.target.value)}
                         required
                     />
                     <div>
@@ -62,9 +62,9 @@ function Register () {
                     </label>
                     </div>
                     <input 
-                        typeof="mail"
-                        value={mail}
-                        onChange={(e) => setMail(e.target.value)}
+                        typeof="email"
+                        value={email}
+                        onChange={(e) => setemail(e.target.value)}
                         required
                     />
                     <div>
@@ -73,7 +73,7 @@ function Register () {
                     </label>
                     </div>
                     <input 
-                        typeof="password"
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
