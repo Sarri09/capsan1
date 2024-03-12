@@ -17,6 +17,7 @@ function Login () {
 
         const response = await window.fetch("http://localhost:5000/login", {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },
@@ -28,10 +29,11 @@ function Login () {
 
         if (response.ok) {
             const data = await response.json();
-            console.log('Response data:', data); // Agrega esta línea
+            console.log('Response data:', data); 
             if (data.isAuthenticated) {
                 usrCookie.set("usr", true);
                 usrCookie.set("dotcom_user", JSON.stringify(data.userData));
+                usrCookie.set("isAdmin", data.isAdmin);
                 window.location.reload(false);
             } else {
                 console.log("Usuario o contraseña no coinciden")

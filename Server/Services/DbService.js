@@ -29,25 +29,20 @@ const databaseService = () => {
       .then((rows) => {
         if (rows.length > 0) {
           const storedPassword = rows[0].password;
-          // Aquí debes comparar la contraseña proporcionada con storedPassword (usando bcrypt o algún otro método seguro)
-          // Si coinciden, devuelve true; de lo contrario, devuelve false.
-          // No compares directamente con la contraseña en texto plano.
-          // ...
+          // ENCRIPTAR CONTRASEÑAAA
           if (storedPassword === password) {
             return true;
           }
         } else {
-          // Usuario no encontrado
           return false;
         }
       })
       .catch((e) => {
         console.log(e);
-        // Maneja el error (por ejemplo, envía una respuesta HTTP con un código de error)
         return false;
       });
   };
-
+  // para cookie de nombre y apellido
   const grapDataFromUser = (email) => {
     return knex(table)
       .where({ email: email })
@@ -58,7 +53,7 @@ const databaseService = () => {
           const apellido = result[0].apellido;
           console.log(`Nombre: ${nombre}, Apellido: ${apellido}`);
           const dataForCookie = [nombre, apellido];
-          console.log('Data for cookie:', dataForCookie); // Agrega esta línea
+          console.log('Data for cookie:', dataForCookie);
           return dataForCookie;
         }
       })
@@ -66,8 +61,31 @@ const databaseService = () => {
         console.log(error);
       });
   };
+  // cookie para verificar admin pero ojo, no utilizar para accesos, es vulnerable
+  const verifAdmin = (email) => {
+    return knex(table)
+      .where({ email: email })
+      .select("IsAdmin")
+      .then(function (result) {
+        if (result && result.length > 0) {
+          const isAdmin = result[0].IsAdmin; 
+          console.log(`isAdmin?: ${isAdmin}`);
+          if (isAdmin === 1) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false; 
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        throw error; 
+      });
+  };
 
-  return { crearUsuario, autenticarUsuario, grapDataFromUser };
+  return { crearUsuario, autenticarUsuario, grapDataFromUser, verifAdmin };
 };
 
 module.exports = {

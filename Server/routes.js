@@ -1,36 +1,60 @@
 const { request, response } = require('express');
 
 module.exports = function(app, databaseService) {
-    //registro
-    app.post('/register', (req, res) => {
-        const data = req.body;
-        console.log(data);
-
-        //AGARRA LO QUE ESTA PASANDO POR EL BODY Y MANDALO A EL SERVICIO QUE GESTIONA LA BASE DE DATOS EN UNA
-        //FUNCION QUE INSERTE DATOS EN LA TABLA ()agregarusuario (data)
-        databaseService.crearUsuario(data)
-        .then(() => {
-            res.json({"mensaje" : "Usuario registrado con exito"});
-        }).catch(e => {
-            res.status(500).json(e);
-        })
-        //res.json({"mensaje" : "Usuario registrado con exito"});
-    });
-
-    app.post('/login', (req, res) => {
-        const data = req.body;
-        console.log("recibiendo usuario: \n"+data+"\n para verificacion");
+    const checkAuth = (req, res, next) => {
+    console.log('Session:', req.session);
+    if (req.session.isAuthenticated && req.session.isAdmin) {
+      next();
+    } else {
+      res.status(401).send('Acceso no autorizado');
+    }
+  };
     
-        Promise.all([databaseService.autenticarUsuario(data), databaseService.grapDataFromUser(data.email)])
-        .then(([isAuthenticated, userData]) => {
-            if(isAuthenticated) {
-                res.json({ isAuthenticated: true, userData: JSON.stringify(userData) });
-            } else {
-                res.status(401).json({ "mensaje" : "Correo electronico o contraseña no encontrados" })
-            }
-        }).catch(e => {
-            res.status(500).json(e);
-        });
-    });
+  app.post('/register', (req, res) => {
+    const data = req.body;
+    console.log(data);
+  
+    databaseService.crearUsuario(data)
+      .then(() => {
+        res.json({ "mensaje": "Usuario registrado con éxito" });
+      }).catch(e => {
+        res.status(500).json(e);
+      });
+  });
+  
+  app.post('/login', (req, res) => {
+    const data = req.body;
+    console.log("recibiendo usuario: \n" + data + "\n para verificación");
+  
+    Promise.all([
+      databaseService.autenticarUsuario(data),
+      databaseService.grapDataFromUser(data.email),
+      databaseService.verifAdmin(data.email)
+    ])
+      .then(([isAuthenticated, userData, isAdmin]) => {
+        if (isAuthenticated) {
+            req.session.isAuthenticated = true;
+            req.session.userData = userData;
+            req.session.isAdmin = isAdmin;
+  
+            res.json({
+              isAuthenticated: true,
+              userData: JSON.stringify(userData),
+              isAdmin: !!isAdmin, 
+            });            
+        } else {
+          res.status(401).json({ "mensaje": "Correo electrónico o contraseña no encontrados" });
+        }
+      })
+      .catch(e => {
+        res.status(500).json(e);
+      });
+  });
+
+  app.get('/ruta-protegida', checkAuth, (req, res) => {
+    console.log('Autenticado:', req.session.isAuthenticated);
+    console.log('Admin:', req.session.isAdmin);
+    res.json({ message: 'Bienvenido, administrador' });
+  });  
     
 }
