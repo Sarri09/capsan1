@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./login";
 import Register from "./register";
 import Dashboard from "./dashboard";
+import FormularioCreator from "./Createform";
 import Cookies from "universal-cookie";
 
 function App() {
@@ -17,7 +18,9 @@ function App() {
 
   return (
    <>
-    {SessionExist() ? <Dashboard/> : <Login/>}
+    {//SessionExist() ? <Dashboard/> : <Login/>
+      <FormularioCreator/>
+    }
     
    </>
   );
