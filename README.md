@@ -29,6 +29,8 @@ Quizas te pida instalar algunas dependencias para correr la api, tales como:
 
 `npm install cors --save`
 
+`npm install mongoose --save`
+
 Asegurate de tener instalado node.js, lo puedes descargar de aqui 
 
 https://nodejs.org/en/download/current
