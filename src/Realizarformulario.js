@@ -9,7 +9,6 @@ const RealizarFormulario = ({ formulario: formData }) => {
 
   useEffect(() => {
     setFormularioState(formData);
-    // Reiniciar las respuestas seleccionadas y las respuestas correctas al cambiar el formulario
     setRespuestasSeleccionadas([]);
     setRespuestasCorrectas(0);
   }, [formData]);
@@ -21,7 +20,6 @@ const RealizarFormulario = ({ formulario: formData }) => {
   };
 
   const handleEnviarFormulario = () => {
-    // Calcular el total de respuestas correctas
     let totalCorrectas = 0;
     formularioState.preguntas.forEach((pregunta, index) => {
       if (pregunta.respuestacorrecta === respuestasSeleccionadas[index]) {
@@ -30,26 +28,23 @@ const RealizarFormulario = ({ formulario: formData }) => {
     });
     setRespuestasCorrectas(totalCorrectas);
 
-    // Obtener el correo electrónico del tercer elemento del array userData en la cookie
     const dotcom_user_cookie = cookies.get('dotcom_user');
     const userData = dotcom_user_cookie ? JSON.parse(dotcom_user_cookie) : null;
     const correoElectronico = userData ? userData[2] : null;
 
-    // Enviar el puntaje a la API junto con el correo electrónico
     const puntaje = `${totalCorrectas}/${formularioState.preguntas.length}`;
     enviarPuntaje(puntaje, correoElectronico);
   };
 
   const enviarPuntaje = (puntaje, correoElectronico) => {
     if (correoElectronico) {
-      // La cookie y el correo electrónico están disponibles, enviar la solicitud con el correo electrónico
       fetch('http://localhost:5000/guardarnota', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Cookie': `dotcom_user=${cookies.get('dotcom_user')}`,
         },
-        body: JSON.stringify({ puntaje, correoElectronico, nombreFormulario: formularioState.nombre }), // Incluir nombre del formulario en el cuerpo
+        body: JSON.stringify({ puntaje, correoElectronico, nombreFormulario: formularioState.nombre }), 
       })
       .then(response => {
         if (!response.ok) {

@@ -89,7 +89,6 @@ module.exports = function(app, databaseService) {
 //     const data = req.body;
 //     console.log(data)});
 
-// Ruta para obtener los nombres de los formularios desde MongoDB
 app.get('/obtenerformularios', async (req, res) => {
     try {
       const formularios = await Formulario.find({});
@@ -126,12 +125,10 @@ app.get('/obtenerformularios', async (req, res) => {
 app.post('/guardarnota', (req, res) => {
     const data = req.body;
 
-    // Obtener los datos necesarios del cuerpo de la solicitud
     const correoElectronico = data.correoElectronico;
     const nombreFormulario = data.nombreFormulario;
     const puntaje = data.puntaje;
 console.log(data.nombreFormulario)
-    // Insertar la nota en la base de datos
     databaseService.insertarNota({
         correoElectronico: correoElectronico,
         nombreFormulario: nombreFormulario,
@@ -148,18 +145,14 @@ console.log(data.nombreFormulario)
 
 app.get('/obtenerNotas', async (req, res) => {
     try {
-      // Consultar todos los registros de la tabla de Notas
       const notas = await databaseService.obtenerNotas();
   
-      // Enviar los datos de las notas como respuesta
       res.json(notas);
     } catch (error) {
       console.error('Error al obtener las notas:', error);
       res.status(500).json({ error: 'Error al obtener las notas' });
     }
   });
-
-// En el archivo de tu API (app.js, index.js, etc.)
 
 app.get('/notasUsuario/:correoElectronico', (req, res) => {
     const correoElectronico = req.params.correoElectronico;

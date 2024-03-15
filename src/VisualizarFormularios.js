@@ -21,10 +21,8 @@ const VisualizarFormularios = () => {
         return response.json();
       })
       .then(data => {
-        // Abre una nueva ventana
         const newWindow = window.open("", "_blank", "width=1200,height=900");
         
-        // Renderiza el componente RealizarFormulario en la nueva ventana
         newWindow.document.body.innerHTML = `
           <div id="root"></div>
         `;

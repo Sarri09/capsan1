@@ -4,7 +4,6 @@ const NotasPage = () => {
   const [notas, setNotas] = useState([]);
 
   useEffect(() => {
-    // Realizar la solicitud al backend para obtener los datos de la tabla de Notas
     fetch('http://localhost:5000/obtenerNotas')
       .then(response => response.json())
       .then(data => {

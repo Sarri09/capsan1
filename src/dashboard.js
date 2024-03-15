@@ -76,17 +76,13 @@ function Dashboard() {
   };
 
   const logout = () => {
-    // Eliminar todas las cookies
     cookies.remove('dotcom_user');
     cookies.remove('connect.sid');
     cookies.remove('usr');
     cookies.remove('isAdmin');
-    // Actualizar el estado del usuario
     setUserData(null);
     setIsAdmin(false);
     window.location.reload(false);
-    // Redirigir al usuario a la página de inicio de sesión u otra página
-    // window.location.href = '/login';
   };
 
   return (
@@ -106,10 +102,8 @@ function Dashboard() {
         </>
       )}
 
-      {/* Botón de logout */}
       <button onClick={logout}>Logout</button>
 
-      {/* Ventanas emergentes */}
       {showFormularioModal && (
         <div className="modal">
           <div className="modal-content">

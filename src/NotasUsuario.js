@@ -27,7 +27,7 @@ const NotasUsuario = () => {
     } else {
       console.error('La cookie dotcom_user o el correo electrónico no están disponibles');
     }
-  }, [cookies]); // Ejecutar cada vez que cambia la cookie
+  }, [cookies]); 
 
   return (
     <div>
