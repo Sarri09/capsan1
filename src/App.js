@@ -2,7 +2,11 @@ import React from "react";
 import Login from "./login";
 import Register from "./register";
 import Dashboard from "./dashboard";
-import FormularioCreator from "./Createform";
+import FormularioCreator from "./FormularioCreator";
+import VisualizarFormularios from "./VisualizarFormularios";
+import RealizarFormulario from "./Realizarformulario";
+import NotaUsuario from "./NotasUsuario";
+import NotasPage from "./NotasPage"
 import Cookies from "universal-cookie";
 
 function App() {
@@ -18,8 +22,7 @@ function App() {
 
   return (
    <>
-    {//SessionExist() ? <Dashboard/> : <Login/>
-      <FormularioCreator/>
+    {SessionExist() ? <Dashboard/> : <Login/>
     }
     
    </>

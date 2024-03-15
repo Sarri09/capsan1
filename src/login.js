@@ -13,7 +13,7 @@ function Login () {
     const sendData = async (event) => {
         event.preventDefault();
 
-        console.log("enviando: "+ JSON.stringify({ email: email, password: password }) );
+        //console.log("enviando: "+ JSON.stringify({ email: email, password: password }) );
 
         const response = await window.fetch("http://localhost:5000/login", {
             method: "POST",

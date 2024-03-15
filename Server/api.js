@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const { databaseService } = require('./Services/DbService');
+const { Formulario } = require('./Services/databaseServiceMongo'); // Importa el modelo de MongoDB
+
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
@@ -21,8 +23,11 @@ app.use(session({
   cookie: { secure: false } 
 }));
 
-const dbservice = databaseService();
+const mongoDBService = { Formulario };
 
+const dbservice = databaseService(mongoDBService);
+
+// Importa y utiliza tus rutas
 require('./routes')(app, dbservice);
 
 app.listen(5000, () => {
