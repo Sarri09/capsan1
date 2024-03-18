@@ -1,3 +1,15 @@
+# Proyecto Capsan1
+
+## Tabla de contenidos
+* [Importante](#importante)
+* [Como correr el proyecto](#como-correr-el-proyecto)
+* [Dependencias](#dependencias)
+* [Api](#correr-la-api)
+* [Errores](#errores)
+* [Base de datos mysql](#base-de-datos-mysql)
+* [Base de datos MongoDB](#base-de-datos-mongodb)
+* [Session-Express](#session-express)
+
 ## IMPORTANTE
 Los archivos del front se encuentran en la carpeta src, si te fijas hay un archivo llamado `app.js`, este es de donde sale todo el front, los archivos `login.js` y `register.js` se llaman como si fuesen etiquetas html, es una funcion que entrega react para realizar la pagina en una sola pestaña, los estilos te recomiendo realizarlos en una carpeta aparte dentro de la carpeta src, para que asi se vea mas ordenado, la forma de importarlos a los formularios esta aqui 
 
@@ -6,56 +18,56 @@ https://create-react-app.dev/docs/adding-a-stylesheet/
 ## Como correr el proyecto
 Debes ejecutar el comando 
 
-`npm start`
+    npm start
 
-## Si es la primera vez que ejecutas el archivo en el equipo, debes ejecutar el comando 
+* Si es la primera vez que ejecutas el archivo en el equipo, debes ejecutar el comando 
 
-`npm install --save`
+        npm install --save
 
 ## Dependencias
 
 Quiza te pida instalar algunas dependencias como `react-dom`:
 
-`npm install react-dom --save`
+    npm install react-dom --save
 
 Lista de dependencias a instalar en el cliente:
 
-`npm install sweetalert2`
+    npm install sweetalert2
 
-`npm install universal-cookie`
+    npm install universal-cookie
 
-## Si quieres correr la Api (modo cliente/servidor)
+## Correr la Api 
 La Api esta hecha en express, si quieres correrla, quiza te pida instalar nodemon:
 
-`npm install nodemon --save`
+    npm install nodemon --save
 
 Luego ejecuta el comando `nodemon .\api.js`
 
 Quizas te pida instalar algunas dependencias para correr la api, tales como:
 
-`npm install express --save`
+    npm install express --save
 
-`npm install body-parser --save`
+    npm install body-parser --save
 
-`npm install cors --save`
+    npm install cors --save
 
-`npm install mongoose --save`
+    npm install mongoose --save
 
-`npm install mongodb --save`
+    npm install mongodb --save
 
-`npm install cookie-parser --save`
+    npm install cookie-parser --save
 
-`npm install dotenv --save`
+    npm install dotenv --save
 
-`npm install express-session --save`
+    npm install express-session --save
 
-`npm install knex --save`
+    npm install knex --save
 
-`npm install mysql --save`
+    npm install mysql --save
 
-`npm install react-dom --save`
+    npm install react-dom --save
 
-`npm install universal-cookie --save`
+    npm install universal-cookie --save
 
 Asegurate de tener instalado node.js, lo puedes descargar de aqui 
 
