@@ -108,4 +108,4 @@ Para controlar la sesion de un usuario se utiliza session express, el cual utili
       cookie: { secure: false } 
     }));
 
-Por favor, dentro del `.env` se debe definir la variable `SESSION_SECRET`
+Por favor, dentro del `.env` se debe definir el valor de la variable `SESSION_SECRET`
