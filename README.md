@@ -105,7 +105,7 @@ Para controlar la sesion de un usuario se utiliza session express, el cual utili
       secret: process.env.SESSION_SECRET, 
       resave: false,
       saveUninitialized: true,
-      cookie: { secure: false } 
+      cookie: { secure: false } // Al contar con un certificado SSL, por favor trabajar con el estado true en secure:
     }));
 
 Por favor, dentro del `.env` se debe definir el valor de la variable `SESSION_SECRET`
